@@ -1,0 +1,102 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact Us — TroveMart</title>
+<meta name="description" content="Get in touch with TroveMart (Momin Khan Ltd). Email us at info@mominkhanltd.com or use our contact form.">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html" aria-label="TroveMart home">
+      <svg class="logo-mark" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+        <path d="M6 2h12l3 5-9 15L3 7z" fill="url(#g)" stroke="#0c1533" stroke-width=".6" stroke-linejoin="round"/>
+        <path d="M3 7h18M9 2 7 7l5 15M15 2l2 5-5 15" fill="none" stroke="#0c1533" stroke-width=".6" opacity=".35"/>
+        <defs><linearGradient id="g" x1="0" y1="0" x2="24" y2="24"><stop offset="0" stop-color="#ffd772"/><stop offset="1" stop-color="#f0a500"/></linearGradient></defs>
+      </svg>
+      <span class="logo-text">Trove<span class="logo-accent">Mart</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Open menu" aria-controls="mainNav" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="delivery-returns.html">Delivery &amp; Returns</a>
+      <a href="contact.html">Contact</a>
+      <a class="nav-cta" href="https://www.ebay.co.uk/str/primecartltd" target="_blank" rel="noopener">Visit eBay Store <span aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <nav class="crumb"><a href="index.html">Home</a> &nbsp;›&nbsp; Contact</nav>
+    <h1>Contact Us</h1>
+    <p class="page-sub">Got a question? We’d love to hear from you.</p>
+  </div>
+</section>
+
+<main class="container page">
+  <div class="prose">
+    <div class="info-card">
+      <p style="margin:0 0 6px"><strong>Email us directly:</strong></p>
+      <a class="contact-email" href="mailto:info@mominkhanltd.com">✉️ info@mominkhanltd.com</a>
+      <p style="margin:12px 0 0;font-size:.92rem;color:#67718a">We aim to reply within 1–2 business days. For questions about an existing order, contacting us through your eBay order is usually fastest.</p>
+    </div>
+
+    <h2>Send us a message</h2>
+    <p>Fill in the form below and it will open your email app with the details ready to send.</p>
+    <form class="cform" id="contactForm">
+      <div class="field"><label for="cname">Your name</label><input id="cname" type="text" required></div>
+      <div class="field"><label for="cemail">Your email</label><input id="cemail" type="email" required></div>
+      <div class="field"><label for="csubject">Subject</label><input id="csubject" type="text" placeholder="How can we help?"></div>
+      <div class="field"><label for="cmsg">Message</label><textarea id="cmsg" required></textarea></div>
+      <button class="btn-primary" type="submit">Send message</button>
+    </form>
+
+    <p class="muted-note">TroveMart is a trading name of Momin Khan Ltd, a company registered in the United Kingdom. Purchases are completed via our eBay store.</p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <span class="logo-text">Trove<span class="logo-accent">Mart</span></span>
+      <p>Your trusted UK store for everyday essentials — automotive, tools, electronics, home &amp; more. Orders are securely fulfilled through our eBay store with full buyer protection.</p>
+      <p class="footer-company">TroveMart is a trading name of <strong>Momin&nbsp;Khan&nbsp;Ltd</strong>.</p>
+      <a class="btn-primary sm" href="https://www.ebay.co.uk/str/primecartltd" target="_blank" rel="noopener">Shop on eBay <span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="footer-col">
+      <h4>Information</h4>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="delivery-returns.html">Delivery &amp; Returns</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Why buy from us</h4>
+      <ul><li>eBay Buyer Protection</li><li>Fast UK Dispatch</li><li>Top-Rated Seller</li></ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 TroveMart · Powered by <strong>Momin Khan Ltd</strong> · Purchases completed securely on eBay.</span>
+    <span>trovemart.co.uk</span>
+  </div>
+</footer>
+
+<script src="assets/js/nav.js"></script>
+<script>
+  document.getElementById("contactForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = document.getElementById("cname").value.trim();
+    var email = document.getElementById("cemail").value.trim();
+    var subj = document.getElementById("csubject").value.trim() || ("Enquiry from " + name);
+    var msg = document.getElementById("cmsg").value.trim();
+    var body = msg + "\n\n— " + name + " (" + email + ")";
+    window.location.href = "mailto:info@mominkhanltd.com?subject=" +
+      encodeURIComponent(subj) + "&body=" + encodeURIComponent(body);
+  });
+</script>

@@ -1,0 +1,17 @@
+# --- Secrets & runtime data (NEVER commit) ---
+config.php
+orders/
+
+# --- Installed / vendored libraries (re-installed on server) ---
+stripe-php/
+vendor/
+
+# --- Scraper virtualenv & Python caches ---
+scrape/venv/
+__pycache__/
+*.pyc
+
+# --- OS / editor / logs ---
+.DS_Store
+Thumbs.db
+*.log
