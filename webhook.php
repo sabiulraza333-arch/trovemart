@@ -36,19 +36,32 @@ if ($event->type === 'checkout.session.completed') {
     } catch (Exception $e) { /* ignore */ }
 
     $cd   = isset($s->customer_details) ? $s->customer_details : null;
-    $ship = isset($s->shipping_details) ? $s->shipping_details : null;
+
+    // Newer API versions moved the delivery address to collected_information.shipping_details;
+    // older ones put it at the top level. Fall back to the billing address as a last resort so
+    // an order is never recorded without somewhere to ship it.
+    $ship = null;
+    if (isset($s->collected_information) && isset($s->collected_information->shipping_details)) {
+        $ship = $s->collected_information->shipping_details;
+    } elseif (isset($s->shipping_details)) {
+        $ship = $s->shipping_details;
+    }
     $addr = ($ship && isset($ship->address)) ? $ship->address : null;
+    if (!$addr && $cd && isset($cd->address) && !empty($cd->address->line1)) {
+        $addr = $cd->address;
+    }
+    $shipName = ($ship && !empty($ship->name)) ? $ship->name : ($cd && $cd->name ? $cd->name : '');
 
     $order = [
         'order_id' => $s->id,
         'date'     => date('Y-m-d H:i'),
-        'name'     => $cd && $cd->name ? $cd->name : ($ship ? $ship->name : ''),
+        'name'     => $cd && $cd->name ? $cd->name : $shipName,
         'email'    => $cd && $cd->email ? $cd->email : '',
         'amount'   => number_format((isset($s->amount_total) ? $s->amount_total : 0) / 100, 2),
         'currency' => strtoupper(isset($s->currency) ? $s->currency : 'gbp'),
         'items'    => $items,
         'shipping' => $addr ? [
-            'name'     => $ship->name,
+            'name'     => $shipName,
             'line1'    => isset($addr->line1) ? $addr->line1 : '',
             'line2'    => isset($addr->line2) ? $addr->line2 : '',
             'city'     => isset($addr->city) ? $addr->city : '',
