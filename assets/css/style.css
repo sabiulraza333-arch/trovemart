@@ -39,7 +39,8 @@ ul{margin:0;padding:0;list-style:none}
   backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .header-inner{display:flex;align-items:center;justify-content:space-between;height:66px}
 .logo{display:flex;align-items:center;gap:.55em}
-.logo-mark{filter:drop-shadow(0 3px 6px rgba(240,165,0,.35))}
+.logo-mark{width:34px;height:34px;display:block;flex:none;
+  filter:drop-shadow(0 2px 5px rgba(15,59,46,.28))}
 .logo-text{font-family:var(--display);font-weight:800;font-size:1.32rem;letter-spacing:-.02em;color:var(--brand)}
 .logo-accent{color:var(--accent-dark)}
 .nav-cta{background:var(--brand);color:#fff;padding:.6em 1.1em;font-size:.9rem}
@@ -112,6 +113,7 @@ ul{margin:0;padding:0;list-style:none}
 .footer-inner{display:grid;grid-template-columns:2fr 1fr 1fr;gap:34px;
   padding:52px 22px 34px}
 .footer-brand .logo-text{color:#fff}
+.logo-lockup{display:flex;align-items:center;gap:.55em;margin-bottom:12px}
 .footer-brand .logo-accent{color:var(--accent)}
 .footer-brand p{margin:12px 0 18px;font-size:.92rem;max-width:360px;line-height:1.6}
 .footer-company{margin:-8px 0 18px !important;font-size:.82rem;color:#9aa6c2}

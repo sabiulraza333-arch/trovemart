@@ -11,8 +11,10 @@ Notes:
   - Categorises each item with simple keyword heuristics (best-effort).
   - Only reads PUBLIC store pages and links straight back to eBay for checkout.
 """
-import argparse, json, re, sys, urllib.request
+import argparse, json, os, re, sys, time, urllib.request
 from bs4 import BeautifulSoup
+
+PAGE_DELAY = 2.5   # polite gap between page fetches; eBay throttles fast crawls
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/120 Safari/537.36")
@@ -107,12 +109,22 @@ def crawl(base_url: str, max_pages: int = 6) -> list:
     all_items = {}
     for pg in range(1, max_pages + 1):
         url = f"{base_url}{'&' if '?' in base_url else '?'}_pgn={pg}"
-        try:
-            html = fetch(url)
-        except Exception as e:
-            print(f"  page {pg}: fetch error {e}", file=sys.stderr)
-            break
-        found = parse(html)
+        # An empty page means either the end of the store or eBay throttling us.
+        # Retry with a longer pause before believing it is the end, otherwise a
+        # throttled run looks like a store that suddenly lost most of its stock.
+        found = {}
+        for attempt in range(3):
+            if pg > 1 or attempt:
+                time.sleep(PAGE_DELAY * (attempt + 1))
+            try:
+                found = parse(fetch(url))
+            except Exception as e:
+                print(f"  page {pg}: fetch error {e}", file=sys.stderr)
+                found = {}
+            if found:
+                break
+            if attempt < 2:
+                print(f"  page {pg}: empty — retrying", file=sys.stderr)
         new = {k: v for k, v in found.items() if k not in all_items}
         print(f"  page {pg}: {len(found)} items ({len(new)} new)", file=sys.stderr)
         if not new:
@@ -149,6 +161,8 @@ def main():
     ap.add_argument("--file")
     ap.add_argument("--store-url", default="https://www.ebay.co.uk/str/primecartltd")
     ap.add_argument("--out")
+    ap.add_argument("--force", action="store_true", help="write even if the item count drops sharply")
+    ap.add_argument("--catalog", help="server-side price catalog (default: ../assets/data/products.json)")
     args = ap.parse_args()
 
     if args.file:
@@ -161,12 +175,35 @@ def main():
     for cat, n in Counter(i["category"] for i in items).most_common():
         print(f"  {cat}: {n}", file=sys.stderr)
 
+    # A throttled or half-finished crawl must never overwrite a good catalog:
+    # the storefront would lose products and checkout would reject them.
+    if args.out and os.path.exists(args.out) and not args.force:
+        prev = len(re.findall(r'^\s*id: "', open(args.out, encoding="utf-8").read(), re.M))
+        if prev and len(items) < prev * 0.8:
+            print(f"\nREFUSING TO WRITE: scraped {len(items)} items but the current "
+                  f"catalog has {prev}. That looks like a blocked or partial crawl.\n"
+                  f"Re-run later, or pass --force if the store really did shrink.",
+                  file=sys.stderr)
+            return 1
+
     js = to_products_js(items, args.store_url)
     if args.out:
         open(args.out, "w", encoding="utf-8").write(js)
         print(f"\nWrote {args.out}", file=sys.stderr)
+
+        # checkout.php prices every cart line against this file, so it has to be
+        # regenerated in the same run — a stale copy means new listings can't be
+        # bought at all and changed prices get charged at the old amount.
+        cat = args.catalog or os.path.join(
+            os.path.dirname(os.path.abspath(args.out)), "..", "data", "products.json")
+        cat = os.path.normpath(cat)
+        os.makedirs(os.path.dirname(cat), exist_ok=True)
+        with open(cat, "w", encoding="utf-8") as fh:
+            json.dump([{"id": i["id"], "name": i["name"], "price": round(i["price"], 2)}
+                       for i in items], fh, ensure_ascii=False, indent=1)
+        print(f"Wrote {cat}", file=sys.stderr)
     else:
         print(js)
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main() or 0)
