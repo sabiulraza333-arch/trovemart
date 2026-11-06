@@ -10,6 +10,59 @@ else { http_response_code(500); exit; }
 
 \Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY);
 
+/**
+ * Send the order notification.
+ *
+ * This server has no local mail transport, so PHP's mail() silently discards
+ * everything — which is why order emails never arrived. Send over SMTP when
+ * credentials are configured, and log any failure so a missed notification is
+ * discoverable rather than invisible. The order itself is already saved to
+ * /orders before this runs, so a mail failure never loses an order.
+ */
+function send_order_email($subject, $bodyText, $replyTo = '')
+{
+    $configured = defined('SMTP_HOST') && SMTP_HOST !== '' &&
+                  stripos(SMTP_HOST, 'REPLACE') === false;
+
+    if (!$configured) {
+        $headers = "From: TroveMart Orders <orders@trovemart.co.uk>\r\n"
+                 . ($replyTo ? "Reply-To: " . $replyTo . "\r\n" : "")
+                 . "Content-Type: text/plain; charset=utf-8";
+        if (!@mail(ORDER_EMAIL, $subject, $bodyText, $headers)) {
+            error_log("TroveMart: order email not sent — no SMTP configured and mail() failed");
+        }
+        return false;
+    }
+
+    require_once __DIR__ . '/vendor/phpmailer/Exception.php';
+    require_once __DIR__ . '/vendor/phpmailer/PHPMailer.php';
+    require_once __DIR__ . '/vendor/phpmailer/SMTP.php';
+
+    try {
+        $m = new \PHPMailer\PHPMailer\PHPMailer(true);
+        $m->isSMTP();
+        $m->Host       = SMTP_HOST;
+        $m->Port       = defined('SMTP_PORT') ? (int) SMTP_PORT : 587;
+        $m->SMTPAuth   = true;
+        $m->Username   = SMTP_USER;
+        $m->Password   = SMTP_PASS;
+        $m->SMTPSecure = ($m->Port === 465) ? 'ssl' : 'tls';
+        $m->CharSet    = 'UTF-8';
+        $m->Timeout    = 20;
+
+        $m->setFrom(SMTP_USER, 'TroveMart Orders');
+        $m->addAddress(ORDER_EMAIL);
+        if ($replyTo && filter_var($replyTo, FILTER_VALIDATE_EMAIL)) $m->addReplyTo($replyTo);
+        $m->Subject = $subject;
+        $m->Body    = $bodyText;
+        $m->send();
+        return true;
+    } catch (\Throwable $e) {
+        error_log("TroveMart: order email failed — " . $e->getMessage());
+        return false;
+    }
+}
+
 $payload = file_get_contents('php://input');
 $sig     = isset($_SERVER['HTTP_STRIPE_SIGNATURE']) ? $_SERVER['HTTP_STRIPE_SIGNATURE'] : '';
 try {
@@ -100,10 +153,11 @@ if ($event->type === 'checkout.session.completed') {
     $lines[] = "";
     $lines[] = "View all orders: " . SITE_URL . "/orders.php";
 
-    $headers = "From: TroveMart Orders <orders@trovemart.co.uk>\r\n"
-             . "Reply-To: " . $order['email'] . "\r\n"
-             . "Content-Type: text/plain; charset=utf-8";
-    @mail(ORDER_EMAIL, "New order — £" . $order['amount'] . " — TroveMart", implode("\n", $lines), $headers);
+    send_order_email(
+        "New order — £" . $order['amount'] . " — TroveMart",
+        implode("\n", $lines),
+        $order['email']
+    );
 }
 
 http_response_code(200);
