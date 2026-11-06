@@ -92,11 +92,12 @@
 
   function card(p) {
     var c = catColor(p.category);
+    var href = "product.html?id=" + encodeURIComponent(p.id);
     return '<article class="card">' +
-      media(p) +
+      '<a class="card-link" href="' + href + '" aria-label="' + esc(p.name) + '">' + media(p) + '</a>' +
       '<div class="card-body">' +
         '<span class="badge" style="background:' + c[0] + ';color:' + c[2] + '">' + esc(p.category) + '</span>' +
-        '<h3 class="card-title">' + esc(p.name) + '</h3>' +
+        '<h3 class="card-title"><a href="' + href + '">' + esc(p.name) + '</a></h3>' +
         '<div class="card-foot">' +
           '<span class="price">' + esc(SITE.currency) + Number(p.price).toFixed(2) + '</span>' +
           '<button class="btn-buy add-to-cart" type="button" data-id="' + esc(p.id) + '" ' +
@@ -122,18 +123,43 @@
       if (cb) cb.addEventListener("click", function () { query = ""; searchInput.value = ""; setCategory("All"); });
       return;
     }
-    grid.innerHTML = list.map(card).join("");
+    // 174 cards at once made the homepage ~37,000px tall and loaded every
+    // image up front; show a page at a time instead.
+    shown = Math.min(shown, list.length);
+    grid.innerHTML = list.slice(0, shown).map(card).join("");
+    renderMoreButton(list.length);
+  }
+
+  var PAGE = 24;
+  var shown = PAGE;
+
+  function renderMoreButton(total) {
+    var wrap = document.getElementById("moreWrap");
+    if (!wrap) return;
+    if (shown >= total) { wrap.innerHTML = ""; return; }
+    var left = total - shown;
+    wrap.innerHTML = '<button class="btn-ghost btn-more" id="moreBtn" type="button">' +
+      "Show more (" + left + " left)</button>";
+    document.getElementById("moreBtn").addEventListener("click", function () {
+      shown += PAGE;
+      render();
+    });
   }
 
   function setCategory(cat) {
     activeCategory = cat;
+    shown = PAGE;                 // a new filter starts from the first page
     filtersEl.querySelectorAll(".filter-pill").forEach(function (p) {
       p.classList.toggle("active", p.dataset.cat === cat);
     });
     render();
   }
 
-  searchInput.addEventListener("input", function (e) { query = e.target.value; render(); });
+  searchInput.addEventListener("input", function (e) {
+    query = e.target.value;
+    shown = PAGE;
+    render();
+  });
 
   buildChrome();
   buildCategoryTiles();

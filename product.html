@@ -1,0 +1,121 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Product — TroveMart</title>
+<meta name="description" content="Shop automotive & bike parts, tools & hardware, electronics, home & garden and more at TroveMart. Great prices, fast UK dispatch and secure checkout with full eBay Buyer Protection.">
+<meta property="og:title" content="TroveMart — Car Parts, Tools, Electronics & More">
+<meta property="og:description" content="Quality everyday finds at unbeatable prices. Securely fulfilled through our eBay store.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://trovemart.co.uk/assets/img/og-image.png">
+<meta property="og:url" content="https://trovemart.co.uk/">
+<link rel="canonical" href="https://trovemart.co.uk/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/favicon-32.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=7">
+
+<!-- ===================== HEADER ===================== -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html" aria-label="TroveMart home">
+      <img class="logo-mark" src="assets/img/logo-mark.png" width="34" height="34" alt="" aria-hidden="true" decoding="async">
+      <span class="logo-text">Trove<span class="logo-accent">Mart</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Open menu" aria-controls="mainNav" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="delivery-returns.html">Delivery &amp; Returns</a>
+      <a href="contact.html">Contact</a>
+      <a class="nav-cta" href="https://www.ebay.co.uk/str/primecartltd" target="_blank" rel="noopener">Visit eBay Store <span aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- =================== PRODUCT ====================== -->
+<section class="band band--white band--tight" id="pdp">
+  <div class="container">
+    <nav class="crumbs" id="crumbs" aria-label="Breadcrumb"></nav>
+    <div class="pdp" id="pdpBody">
+      <p class="pdp-loading">Loading product…</p>
+    </div>
+  </div>
+</section>
+
+<!-- =================== DETAILS ====================== -->
+<section class="band band--cream" id="pdpDetails" hidden>
+  <div class="container pdp-details">
+    <div class="acc" id="acc"></div>
+  </div>
+</section>
+
+<!-- =================== RELATED ====================== -->
+<section class="band band--tint" id="pdpRelated" hidden>
+  <div class="container">
+    <div class="section-head">
+      <h2>You might also like</h2>
+      <p>More from the same category.</p>
+    </div>
+    <div class="grid" id="relatedGrid"></div>
+  </div>
+</section>
+
+<!-- ====================== CTA ======================= -->
+<section class="band band--accent">
+  <div class="container cta-row">
+    <div class="cta-copy">
+      <h2>Need something specific?</h2>
+      <p>Message us on WhatsApp, or browse the full stock on eBay.</p>
+    </div>
+    <a class="btn-dark js-store-link" target="_blank" rel="noopener">Visit our eBay store <span aria-hidden="true">↗</span></a>
+  </div>
+</section>
+
+</main>
+
+<!-- sticky buy bar (small screens) -->
+<div class="buybar" id="buybar" hidden>
+  <div class="buybar-info"><span class="buybar-name" id="buybarName"></span><span class="buybar-price" id="buybarPrice"></span></div>
+  <button class="btn-primary" type="button" id="buybarAdd">Add to Cart</button>
+</div>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <span class="logo-lockup"><img class="logo-mark" src="assets/img/logo-mark.png" width="34" height="34" alt="" aria-hidden="true" decoding="async"><span class="logo-text">Trove<span class="logo-accent">Mart</span></span></span>
+      <p>Your trusted UK store for fragrance, home essentials and tools. Every order is securely fulfilled through our eBay store with full buyer protection.</p>
+      <p class="footer-company">TroveMart is a trading name of <strong>Momin&nbsp;Khan&nbsp;Ltd</strong>.</p>
+      <address class="footer-address">30 Churchill Place, Canary Wharf, London E14 5RE, United Kingdom</address>
+      <a class="btn-primary sm js-store-link" target="_blank" rel="noopener">Shop on eBay <span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="footer-col">
+      <h4>Information</h4>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="delivery-returns.html">Delivery &amp; Returns</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Why buy from us</h4>
+      <ul><li>eBay Buyer Protection</li><li>Fast UK Dispatch</li><li>Top-Rated Seller</li></ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© <span id="year"></span> TroveMart · Powered by <strong>Momin Khan Ltd</strong> · Purchases completed securely on eBay.</span>
+    <span>trovemart.co.uk</span>
+  </div>
+</footer>
+
+<script src="assets/js/products.js?v=8"></script>
+<script src="assets/js/product.js?v=8"></script>
+<script src="assets/js/nav.js?v=8"></script>
+<script src="assets/js/cart.js?v=8"></script>
+<script src="assets/js/anim.js?v=8"></script>

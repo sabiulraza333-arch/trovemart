@@ -14,12 +14,14 @@
     });
   }
 
-  function add(item) {
+  function add(item, qty) {
     if (!item.id || isNaN(item.price)) return;
+    var n = parseInt(qty, 10);
+    if (!n || n < 1) n = 1;
     var ex = null;
     for (var i = 0; i < cart.length; i++) { if (cart[i].id === item.id) { ex = cart[i]; break; } }
-    if (ex) ex.qty += 1;
-    else cart.push({ id: item.id, name: item.name, price: item.price, image: item.image || "", qty: 1 });
+    if (ex) ex.qty += n;
+    else cart.push({ id: item.id, name: item.name, price: item.price, image: item.image || "", qty: n });
     write(); open();
   }
   function change(id, d) {
@@ -127,7 +129,9 @@
     var addBtn = e.target.closest ? e.target.closest(".add-to-cart") : null;
     if (addBtn) {
       e.preventDefault();
-      add({ id: addBtn.dataset.id, name: addBtn.dataset.name, price: parseFloat(addBtn.dataset.price), image: addBtn.dataset.image });
+      // data-qty lets the product page add several at once; the grid omits it
+      add({ id: addBtn.dataset.id, name: addBtn.dataset.name, price: parseFloat(addBtn.dataset.price), image: addBtn.dataset.image },
+          addBtn.dataset.qty);
       return;
     }
     var t = e.target;
