@@ -516,3 +516,8 @@ ul{margin:0;padding:0;list-style:none}
   .pdp-add{width:100%;flex:none}
   .qty{width:100%;justify-content:space-between}
 }
+
+/* keep the WhatsApp float clear of the sticky buy bar */
+.wa-float{transition:transform .25s ease,box-shadow .25s ease,bottom .25s ease}
+body.has-buybar .wa-float{bottom:84px}
+@media (min-width:621px){ body.has-buybar .wa-float{bottom:22px} }

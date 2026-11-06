@@ -195,6 +195,9 @@
   if ("IntersectionObserver" in window) {
     new IntersectionObserver(function (entries) {
       bar.hidden = entries[0].isIntersecting;
+      // the WhatsApp float sits in the same corner and would cover the bar's
+      // Add to Cart button, so lift it while the bar is up
+      document.body.classList.toggle("has-buybar", !bar.hidden);
     }, { threshold: 0 }).observe(addBtn);
   }
 })();
