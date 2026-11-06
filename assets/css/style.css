@@ -306,3 +306,47 @@ ul{margin:0;padding:0;list-style:none}
   .grid{grid-template-columns:1fr;gap:14px}
   .card-media{aspect-ratio:16/10}
 }
+
+/* ---------- Motion ----------
+   Added by anim.js, which sets .motion on <html> and only then reveals
+   anything — so with JS off or reduced motion on, content renders plainly. */
+.motion .reveal{opacity:0;transform:translateY(18px);
+  transition:opacity .5s cubic-bezier(.22,.61,.36,1) var(--d,0ms),
+             transform .5s cubic-bezier(.22,.61,.36,1) var(--d,0ms)}
+.motion .reveal.in{opacity:1;transform:none}
+
+/* hero copy arrives on load rather than on scroll — it is already in view */
+.motion .hero-eyebrow,.motion .hero h1,.motion .hero-sub,.motion .hero-actions,.motion .hero-points{
+  animation:riseIn .62s cubic-bezier(.22,.61,.36,1) both}
+.motion .hero h1{animation-delay:.06s}
+.motion .hero-sub{animation-delay:.13s}
+.motion .hero-actions{animation-delay:.2s}
+.motion .hero-points{animation-delay:.28s}
+@keyframes riseIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+/* header lifts off the page once you scroll */
+.site-header{transition:box-shadow .25s ease,background .25s ease}
+.site-header.scrolled{box-shadow:0 6px 22px rgba(20,28,51,.10);background:rgba(255,255,255,.97)}
+
+/* product imagery breathes on hover */
+.card-media img{transition:transform .45s cubic-bezier(.22,.61,.36,1)}
+.card:hover .card-media img{transform:scale(1.06)}
+.card{transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+.card:hover{border-color:rgba(240,165,0,.45)}
+
+/* buttons answer the press, not just the hover */
+.btn-primary:active,.btn-buy:active,.nav-cta:active{transform:translateY(0) scale(.97)}
+.btn-buy.added{background:#1f9d57;color:#fff;box-shadow:0 6px 14px rgba(31,157,87,.3)}
+
+/* cart badge acknowledges the item */
+@keyframes badgePop{0%{transform:scale(1)}38%{transform:scale(1.45)}100%{transform:scale(1)}}
+.cart-count.pop{animation:badgePop .42s cubic-bezier(.3,1.4,.5,1)}
+
+/* filter pills */
+.filter-pill{transition:background .18s ease,color .18s ease,border-color .18s ease,transform .18s ease}
+.filter-pill:hover{transform:translateY(-1px)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;scroll-behavior:auto !important}
+}
