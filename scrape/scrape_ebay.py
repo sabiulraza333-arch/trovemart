@@ -112,7 +112,9 @@ def parse(html: str) -> dict:
             if image and image.startswith("//"):
                 image = "https:" + image
             if image:  # request a sharper image (eBay serves larger sizes by number)
-                image = image.replace("s-l300", "s-l500").replace("s-l225", "s-l500")
+                # eBay serves the same photo at several widths; ask for the
+                # largest it actually stores so product pages are not blurry.
+                image = re.sub(r"/s-l\d+\.", "/s-l960.", image)
         if not title or price is None:
             continue
         items[iid] = {

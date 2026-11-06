@@ -54,6 +54,28 @@
     if (fc) fc.innerHTML = categories.map(function (c) { return "<li>" + esc(c) + "</li>"; }).join("");
   }
 
+  // ---- category tiles: one per category, illustrated by a product in it ----
+  function buildCategoryTiles() {
+    var tiles = document.getElementById("catTiles");
+    if (!tiles) return;
+    tiles.innerHTML = categories.map(function (c) {
+      var inCat = PRODUCTS.filter(function (p) { return p.category === c; });
+      var hero = inCat.filter(function (p) { return p.image; })[0];
+      var art = hero
+        ? '<img loading="lazy" src="' + esc(hero.image) + '" alt="">'
+        : '<span class="cat-tile-fallback" aria-hidden="true">🛍️</span>';
+      return '<a class="cat-tile" href="#catalog" data-cat="' + esc(c) + '">' + art +
+        '<span class="cat-tile-label"><strong>' + esc(c) + '</strong>' +
+        '<span>' + inCat.length + ' item' + (inCat.length === 1 ? '' : 's') + '</span></span></a>';
+    }).join("");
+
+    tiles.addEventListener("click", function (e) {
+      var tile = e.target.closest(".cat-tile");
+      if (!tile) return;
+      setCategory(tile.dataset.cat);   // the href still scrolls to the catalog
+    });
+  }
+
   function ebayLink(p) {
     return p.ebayUrl || ("https://www.ebay.co.uk/sch/i.html?_nkw=" + encodeURIComponent(p.name));
   }
@@ -114,5 +136,6 @@
   searchInput.addEventListener("input", function (e) { query = e.target.value; render(); });
 
   buildChrome();
+  buildCategoryTiles();
   render();
 })();

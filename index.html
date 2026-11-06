@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=5">
+<link rel="stylesheet" href="assets/css/style.css?v=6">
 
 <!-- ===================== HEADER ===================== -->
 <header class="site-header">
@@ -34,6 +34,8 @@
   </div>
 </header>
 
+<main>
+
 <!-- ====================== HERO ====================== -->
 <section class="hero" id="top">
   <div class="container hero-inner">
@@ -41,8 +43,8 @@
     <h1 class="hero-title">Handpicked finds at <span>unbeatable prices</span></h1>
     <p class="hero-sub js-tagline"></p>
     <div class="hero-actions">
-      <a class="btn-primary js-store-link" target="_blank" rel="noopener">Shop our eBay Store <span aria-hidden="true">↗</span></a>
-      <a class="btn-ghost" href="#catalog">Browse products</a>
+      <a class="btn-primary" href="#catalog">Browse products</a>
+      <a class="btn-ghost js-store-link" target="_blank" rel="noopener">Our eBay Store <span aria-hidden="true">↗</span></a>
     </div>
     <ul class="trust">
       <li>✓ eBay Buyer Protection</li>
@@ -53,22 +55,85 @@
   </div>
 </section>
 
-<!-- ==================== CATALOG ==================== -->
-<main class="container" id="catalog">
-  <div class="section-head">
-    <h2>Shop our range</h2>
-    <p>Quality products across every category — shipped fast from the UK.</p>
+<!-- =================== TRUST BAND =================== -->
+<section class="band band--cream band--tight">
+  <div class="container trust-row">
+    <div class="trust-item"><span class="trust-ico">🚚</span><h3>Fast UK dispatch</h3><p>Sent quickly from the UK, tracked to your door.</p></div>
+    <div class="trust-item"><span class="trust-ico">🔒</span><h3>Secure checkout</h3><p>Card payments handled by Stripe. We never see your card.</p></div>
+    <div class="trust-item"><span class="trust-ico">🛡️</span><h3>Buyer protection</h3><p>Full protection on every order placed through eBay.</p></div>
+    <div class="trust-item"><span class="trust-ico">💬</span><h3>Real support</h3><p>Message us on WhatsApp — a person replies.</p></div>
   </div>
-  <div class="toolbar">
-    <div class="filters" role="tablist" aria-label="Filter by category"></div>
-    <div class="search-wrap">
-      <span class="search-icon" aria-hidden="true">🔍</span>
-      <input id="search" type="search" placeholder="Search products…" aria-label="Search products">
+</section>
+
+<!-- ================== CATEGORIES ==================== -->
+<section class="band band--white" id="categories">
+  <div class="container">
+    <div class="section-head">
+      <h2>Shop by category</h2>
+      <p>From car parts to fragrance — everything in one place.</p>
+    </div>
+    <div class="cat-tiles" id="catTiles"></div>
+  </div>
+</section>
+
+<!-- ==================== CATALOG ===================== -->
+<section class="band band--tint" id="catalog">
+  <div class="container">
+    <div class="section-head">
+      <h2>Shop our range</h2>
+      <p>Quality products across every category — shipped fast from the UK.</p>
+    </div>
+    <div class="toolbar">
+      <div class="filters" role="tablist" aria-label="Filter by category"></div>
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input id="search" type="search" placeholder="Search products…" aria-label="Search products">
+      </div>
+    </div>
+
+    <p class="count"><span id="result-count"></span></p>
+    <div id="product-grid" class="grid" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- ==================== WHY US ====================== -->
+<section class="band band--dark">
+  <div class="container">
+    <div class="section-head section-head--light">
+      <h2>Why shop with TroveMart</h2>
+      <p>A small UK business with a top-rated eBay record behind it.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <span class="why-num">01</span>
+        <h3>Hand-picked stock</h3>
+        <p>We don't list everything under the sun. Every item is chosen because it is genuinely good value.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-num">02</span>
+        <h3>Priced to beat the high street</h3>
+        <p>Low overheads mean the saving goes to you, not to a shopfront.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-num">03</span>
+        <h3>Backed by our eBay record</h3>
+        <p>Years of feedback from real buyers — and the same care on every order placed here.</p>
+      </div>
     </div>
   </div>
+</section>
 
-  <p class="count"><span id="result-count"></span></p>
-  <section id="product-grid" class="grid" aria-live="polite"></section>
+<!-- ====================== CTA ======================= -->
+<section class="band band--accent">
+  <div class="container cta-row">
+    <div class="cta-copy">
+      <h2>Looking for something else?</h2>
+      <p>Our full stock is listed on eBay, updated daily.</p>
+    </div>
+    <a class="btn-dark js-store-link" target="_blank" rel="noopener">Visit our eBay store <span aria-hidden="true">↗</span></a>
+  </div>
+</section>
+
 </main>
 
 <!-- ==================== FOOTER ==================== -->
@@ -101,8 +166,8 @@
   </div>
 </footer>
 
-<script src="assets/js/products.js"></script>
-<script src="assets/js/app.js"></script>
-<script src="assets/js/nav.js"></script>
-<script src="assets/js/cart.js"></script>
-<script src="assets/js/anim.js"></script>
+<script src="assets/js/products.js?v=6"></script>
+<script src="assets/js/app.js?v=6"></script>
+<script src="assets/js/nav.js?v=6"></script>
+<script src="assets/js/cart.js?v=6"></script>
+<script src="assets/js/anim.js?v=6"></script>

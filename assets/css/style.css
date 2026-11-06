@@ -350,3 +350,80 @@ ul{margin:0;padding:0;list-style:none}
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;
     transition-duration:.01ms !important;scroll-behavior:auto !important}
 }
+
+/* ---------- Bands ----------
+   Full-bleed horizontal sections, each with its own background, so the page
+   reads as a sequence of deliberate blocks rather than one long column. */
+:root{ --cream:#faf6ec; }
+
+.band{padding:86px 0;position:relative}
+.band--tight{padding:52px 0}
+.band--white{background:#fff}
+.band--tint{background:var(--bg)}
+.band--cream{background:var(--cream);border-block:1px solid rgba(20,28,51,.06)}
+.band--dark{background:linear-gradient(165deg,var(--brand-2) 0%,var(--brand) 48%,#0e1934 100%);color:#fff}
+.band--accent{background:linear-gradient(100deg,var(--accent) 0%,#ffc247 100%);color:#20160a}
+
+.section-head{text-align:center;max-width:620px;margin:0 auto 42px}
+.section-head h2{font-family:var(--display);font-weight:800;font-size:clamp(1.65rem,3.4vw,2.4rem);
+  letter-spacing:-.025em;line-height:1.15;margin:0 0 10px}
+.section-head p{color:var(--muted);margin:0;font-size:1.02rem}
+.section-head--light h2{color:#fff}
+.section-head--light p{color:rgba(255,255,255,.72)}
+
+/* trust band */
+.trust-row{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.trust-item{text-align:center}
+.trust-ico{font-size:1.8rem;display:block;margin-bottom:10px}
+.trust-item h3{font-family:var(--display);font-size:1rem;font-weight:700;margin:0 0 5px}
+.trust-item p{color:var(--muted);font-size:.88rem;line-height:1.5;margin:0}
+
+/* category tiles */
+.cat-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.cat-tile{position:relative;display:block;aspect-ratio:3/2;border-radius:var(--radius);
+  overflow:hidden;background:#eef1f7;text-decoration:none;box-shadow:var(--shadow);
+  transition:transform .25s ease,box-shadow .25s ease}
+.cat-tile:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.cat-tile img{width:100%;height:100%;object-fit:cover;
+  transition:transform .5s cubic-bezier(.22,.61,.36,1)}
+.cat-tile:hover img{transform:scale(1.07)}
+.cat-tile::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(10,16,36,.82) 0%,rgba(10,16,36,.25) 45%,transparent 75%)}
+.cat-tile-label{position:absolute;left:18px;right:18px;bottom:15px;z-index:1;color:#fff}
+.cat-tile-label strong{display:block;font-family:var(--display);font-weight:800;font-size:1.08rem;
+  letter-spacing:-.01em}
+.cat-tile-label span{font-size:.82rem;opacity:.8}
+
+/* why-us cards */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.why-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);
+  border-radius:var(--radius);padding:28px 24px;transition:background .25s ease,transform .25s ease}
+.why-card:hover{background:rgba(255,255,255,.1);transform:translateY(-4px)}
+.why-num{font-family:var(--display);font-weight:800;font-size:.84rem;color:var(--accent);
+  letter-spacing:.1em;display:block;margin-bottom:12px}
+.why-card h3{font-family:var(--display);font-size:1.12rem;font-weight:700;margin:0 0 9px;color:#fff}
+.why-card p{color:rgba(255,255,255,.76);font-size:.92rem;line-height:1.6;margin:0}
+
+/* closing CTA */
+.cta-row{display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap}
+.cta-copy h2{font-family:var(--display);font-weight:800;font-size:clamp(1.45rem,3vw,2.05rem);
+  letter-spacing:-.025em;margin:0 0 6px}
+.cta-copy p{margin:0;opacity:.78}
+.btn-dark{display:inline-flex;align-items:center;gap:.5em;background:var(--brand);color:#fff;
+  font-family:var(--display);font-weight:700;border-radius:999px;padding:.9em 1.6em;
+  text-decoration:none;transition:.18s ease;box-shadow:0 10px 24px rgba(20,28,51,.22)}
+.btn-dark:hover{background:var(--brand-2);transform:translateY(-2px)}
+
+@media (max-width:860px){
+  .trust-row{grid-template-columns:repeat(2,1fr);gap:24px 16px}
+  .cat-tiles,.why-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:560px){
+  .band{padding:58px 0}
+  .band--tight{padding:40px 0}
+  .section-head{margin-bottom:30px}
+  .cat-tiles{grid-template-columns:1fr 1fr;gap:12px}
+  .why-grid{grid-template-columns:1fr}
+  .cta-row{flex-direction:column;align-items:flex-start;gap:18px}
+  .btn-dark{width:100%;justify-content:center}
+}
