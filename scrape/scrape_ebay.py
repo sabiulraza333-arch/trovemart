@@ -17,7 +17,23 @@ from bs4 import BeautifulSoup
 PAGE_DELAY = 2.5   # polite gap between page fetches; eBay throttles fast crawls
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
-      "(KHTML, like Gecko) Chrome/120 Safari/537.36")
+      "(KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36")
+
+# eBay returns 403 to requests that do not look like a browser, and a stale
+# Chrome version in the UA is enough on its own — keep UA current and send the
+# headers a real tab would.
+BROWSER_HEADERS = {
+    "User-Agent": UA,
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,"
+              "image/webp,*/*;q=0.8",
+    "Accept-Language": "en-GB,en;q=0.9",
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "none",
+    "Sec-Fetch-User": "?1",
+    "Upgrade-Insecure-Requests": "1",
+    "Cache-Control": "no-cache",
+}
 
 # (category, [regex patterns]). First category with any match wins — so put the
 # most distinctive categories first. Patterns use \b word-boundaries to avoid
@@ -50,9 +66,13 @@ def categorise(title: str) -> str:
     return "More"
 
 def fetch(url: str) -> str:
-    req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept-Language": "en-GB,en"})
+    req = urllib.request.Request(url, headers=dict(BROWSER_HEADERS))
     with urllib.request.urlopen(req, timeout=45) as r:
-        return r.read().decode("utf-8", "ignore")
+        raw = r.read()
+    if r.headers.get("Content-Encoding") == "gzip":
+        import gzip
+        raw = gzip.decompress(raw)
+    return raw.decode("utf-8", "ignore")
 
 def parse(html: str) -> dict:
     soup = BeautifulSoup(html, "html.parser")

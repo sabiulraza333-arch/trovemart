@@ -114,6 +114,8 @@ ul{margin:0;padding:0;list-style:none}
   padding:52px 22px 34px}
 .footer-brand .logo-text{color:#fff}
 .logo-lockup{display:flex;align-items:center;gap:.55em;margin-bottom:12px}
+.footer-address{font-style:normal;font-size:.84rem;line-height:1.6;opacity:.75;margin:8px 0 0}
+.contact-address{font-style:normal;line-height:1.7;margin:0}
 .footer-brand .logo-accent{color:var(--accent)}
 .footer-brand p{margin:12px 0 18px;font-size:.92rem;max-width:360px;line-height:1.6}
 .footer-company{margin:-8px 0 18px !important;font-size:.82rem;color:#9aa6c2}
