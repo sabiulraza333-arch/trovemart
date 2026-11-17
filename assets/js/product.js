@@ -27,12 +27,15 @@
         '<a class="btn-primary" href="index.html">Browse all products</a>' +
       '</div>';
     document.title = "Product not found — TroveMart";
+    // a sold-out or mistyped id must not be left in the index as a real product
+    var noindex = document.createElement("meta");
+    noindex.name = "robots";
+    noindex.content = "noindex";
+    document.head.appendChild(noindex);
     return;
   }
 
   var price = SITE.currency + Number(product.price).toFixed(2);
-  var ebayUrl = product.ebayUrl ||
-    ("https://www.ebay.co.uk/sch/i.html?_nkw=" + encodeURIComponent(product.name));
 
   /* ---- page metadata ------------------------------------------------- */
   // Each product needs its own title, description and canonical, otherwise
@@ -83,11 +86,11 @@
     '<div class="pdp-info">' +
       '<span class="badge pdp-badge">' + esc(product.category) + '</span>' +
       '<h1 class="pdp-title">' + esc(product.name) + '</h1>' +
-      '<p class="pdp-price">' + esc(price) + '<span class="pdp-vat"> inc. VAT</span></p>' +
+      '<p class="pdp-price">' + esc(price) + '<span class="pdp-vat"> &middot; free UK delivery</span></p>' +
       '<ul class="pdp-points">' +
-        '<li>🚚 Fast dispatch from the UK</li>' +
+        '<li>🚚 Free UK delivery — dispatched in 1–2 working days</li>' +
         '<li>🔒 Secure checkout — card details go straight to Stripe</li>' +
-        '<li>🛡️ Covered by eBay Buyer Protection</li>' +
+        '<li>↩️ 14 days to change your mind, 30 days if it is faulty</li>' +
       '</ul>' +
       '<div class="pdp-buy">' +
         '<div class="qty" role="group" aria-label="Quantity">' +
@@ -100,8 +103,7 @@
           'data-price="' + Number(product.price).toFixed(2) + '" ' +
           'data-image="' + esc(product.image || "") + '">Add to Cart</button>' +
       '</div>' +
-      '<a class="pdp-ebay" href="' + esc(ebayUrl) + '" target="_blank" rel="noopener">' +
-        'Prefer to buy on eBay? View this listing ↗</a>' +
+      '<p class="pdp-ebay">Sold and dispatched by Momin Khan Ltd. Secure card payment by Stripe.</p>' +
     '</div>';
 
   /* ---- quantity ------------------------------------------------------- */
@@ -138,15 +140,18 @@
   var sections = [
     ["Description",
       "<p>" + esc(product.name) + "</p>" +
-      "<p>Listed in <strong>" + esc(product.category) + "</strong>. This item is stocked and " +
-      "dispatched by TroveMart, a trading name of Momin Khan Ltd. The full listing, including " +
-      "manufacturer specifications where available, is on our eBay store.</p>" +
-      '<p><a href="' + esc(ebayUrl) + '" target="_blank" rel="noopener">View the full listing on eBay ↗</a></p>'],
+      "<p>Listed in <strong>" + esc(product.category) + "</strong>. Stocked and dispatched by " +
+      "TroveMart, a trading name of Momin Khan Ltd.</p>" +
+      "<p>If you need a measurement, a compatibility check or a photo of the actual item before " +
+      'you order, <a href="contact.html">get in touch</a> — we will check for you.</p>'],
     ["Delivery &amp; Returns",
-      "<p>Orders are dispatched quickly from the UK. Delivery cost and estimated arrival are " +
-      "confirmed at checkout before you pay.</p>" +
-      "<p>Returns are handled through our eBay store, where your purchase is covered by eBay " +
-      "Buyer Protection. Please do not send returns to our office address.</p>" +
+      "<p><strong>Free UK delivery.</strong> Orders are dispatched from the UK, normally within " +
+      "1–2 working days.</p>" +
+      "<p>You buy directly from us here, so you have <strong>14 days from delivery to change your " +
+      "mind</strong> and return the item for a refund (you pay the return postage). If something " +
+      "arrives faulty, damaged or not as described, you have <strong>30 days to reject it for a " +
+      "full refund</strong> and we pay the return postage.</p>" +
+      "<p>Email us first — please do not send returns to our office address.</p>" +
       '<p><a href="delivery-returns.html">Full delivery &amp; returns information</a></p>'],
     ["Payment &amp; Security",
       "<p>Card payments are processed by <strong>Stripe</strong>. Your card details are entered " +

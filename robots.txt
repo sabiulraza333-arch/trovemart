@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Nothing here is for search engines: the admin page, the payment config and
+# the saved order records.
+Disallow: /orders.php
+Disallow: /orders/
+Disallow: /config.php
+Disallow: /checkout.php
+Disallow: /webhook.php
+Disallow: /success.html
+
+Sitemap: https://trovemart.co.uk/sitemap.xml

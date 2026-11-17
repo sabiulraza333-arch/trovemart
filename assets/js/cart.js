@@ -53,7 +53,7 @@
           '<div class="cart-foot">' +
             '<div class="cart-total"><span>Subtotal</span><strong id="cartTotal">£0.00</strong></div>' +
             '<button id="cartCheckout" class="btn-primary cart-checkout" type="button">Checkout</button>' +
-            '<p class="cart-note">🔒 Secure payment via Stripe · delivery calculated at checkout.</p>' +
+            '<p class="cart-note">🔒 Secure payment via Stripe · free UK delivery · 14-day returns.</p>' +
           '</div>' +
         '</aside>';
       document.body.appendChild(host);
