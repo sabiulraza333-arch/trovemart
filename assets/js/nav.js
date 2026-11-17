@@ -15,7 +15,7 @@ var WHATSAPP_MESSAGE = "Hi TroveMart 👋, I have a question.";
     '<div class="container topbar-inner">' +
       '<span>🔒 Secure checkout</span>' +
       '<span>🚚 Fast UK dispatch</span>' +
-      '<span>⭐ Top-rated seller</span>' +
+      '<span>↩️ 14-day returns</span>' +
       '<span>💬 Friendly support</span>' +
     '</div>';
   document.body.insertBefore(bar, document.body.firstChild);
