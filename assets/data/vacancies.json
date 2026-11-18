@@ -1,0 +1,27 @@
+{
+  "_comment": "Open roles shown on careers.html. Delete a role to remove it from the site; set an empty list to show the 'no openings' message. If Breathe HR turns out to expose a vacancy endpoint, careers.js can read that instead without the page changing.",
+  "updated": "2026-11-18",
+  "roles": [
+    {
+      "id": "warehouse-assistant",
+      "title": "Warehouse & Despatch Assistant",
+      "type": "Part-time",
+      "location": "London",
+      "salary": "Competitive, based on experience",
+      "summary": "Picking, packing and despatching customer orders accurately and on time.",
+      "responsibilities": [
+        "Pick and pack orders ready for despatch",
+        "Keep stock tidy, counted and where it should be",
+        "Book parcels in with couriers and track despatches",
+        "Check returned items and log their condition"
+      ],
+      "requirements": [
+        "Careful and organised — the right item, in the right box, every time",
+        "Comfortable lifting and on your feet for much of the day",
+        "Basic computer confidence (email, spreadsheets)",
+        "Right to work in the UK"
+      ],
+      "closing": ""
+    }
+  ]
+}

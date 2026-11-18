@@ -521,3 +521,41 @@ ul{margin:0;padding:0;list-style:none}
 .wa-float{transition:transform .25s ease,box-shadow .25s ease,bottom .25s ease}
 body.has-buybar .wa-float{bottom:84px}
 @media (min-width:621px){ body.has-buybar .wa-float{bottom:22px} }
+
+/* ---------- Careers ---------- */
+.roles{display:grid;gap:18px;max-width:820px;margin:0 auto}
+.role{background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:24px 24px 20px;box-shadow:var(--shadow)}
+.role-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 14px;margin-bottom:10px}
+.role-head h3{font-family:var(--display);font-weight:800;font-size:1.22rem;letter-spacing:-.02em;margin:0}
+.role-meta{display:flex;flex-wrap:wrap;gap:6px}
+.role-chip{font-size:.74rem;font-weight:600;background:var(--bg);color:var(--muted);
+  border:1px solid var(--line);border-radius:999px;padding:.3em .72em}
+.role-summary{color:var(--muted);margin:0 0 14px;line-height:1.6}
+.role-detail{margin-bottom:16px}
+.role-detail summary{cursor:pointer;font-family:var(--display);font-weight:700;font-size:.9rem;
+  color:var(--accent-dark);list-style:none}
+.role-detail summary::-webkit-details-marker{display:none}
+.role-detail summary::before{content:"▸ ";display:inline-block;transition:transform .2s ease}
+.role-detail[open] summary::before{content:"▾ "}
+.role-body{padding-top:12px}
+.role-body h4{font-family:var(--display);font-size:.92rem;margin:14px 0 6px}
+.role-body ul{margin:0;padding-left:20px;color:var(--muted);line-height:1.7;font-size:.92rem}
+.roles-empty{text-align:center;background:#fff;border:1px dashed var(--line);
+  border-radius:var(--radius);padding:44px 24px;max-width:620px;margin:0 auto}
+.roles-empty h3{font-family:var(--display);font-size:1.15rem;margin:0 0 10px}
+.roles-empty p{color:var(--muted);margin:0 0 8px}
+
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.apply-form .field-hint{font-size:.8rem;color:var(--muted);margin:6px 0 0}
+.apply-form input[type=file]{font-size:.9rem}
+.form-status{margin:12px 0 0;font-size:.9rem;color:var(--muted);min-height:1.2em}
+.form-status.is-error{color:#b42318}
+.apply-done{text-align:center;padding:26px 10px}
+.apply-done h3{font-family:var(--display);font-size:1.2rem;margin:0 0 8px}
+.apply-done p{color:var(--muted);margin:0}
+
+@media (max-width:560px){
+  .role{padding:20px 18px 18px}
+  .role-head h3{font-size:1.08rem}
+}
