@@ -26,6 +26,29 @@
         "Right to work in the UK"
       ],
       "closing": ""
+    },
+    {
+      "id": "warehouse-associate",
+      "title": "Warehouse Associate",
+      "type": "Part-time",
+      "location": "London",
+      "salary": "Based on experience",
+      "summary": "Pick, pack and get customer orders out of the door accurately and on time.",
+      "responsibilities": [
+        "Pick and pack customer orders ready for despatch",
+        "Keep stock tidy, counted and where it is supposed to be",
+        "Book parcels in with couriers and keep track of what has gone out",
+        "Check returned items, log their condition and get them back into stock",
+        "Flag anything running low before we sell something we cannot send"
+      ],
+      "requirements": [
+        "Careful and organised — the right item, in the right box, every time",
+        "Comfortable lifting and on your feet for much of the day",
+        "Reliable with time: orders go out on a schedule, not when we get round to it",
+        "Basic computer confidence (email, spreadsheets, courier websites)",
+        "Right to work in the UK"
+      ],
+      "closing": ""
     }
   ]
 }
