@@ -1,24 +1,28 @@
 {
-  "_comment": "Open roles shown on careers.html. Delete a role to remove it from the site; set an empty list to show the 'no openings' message. If Breathe HR turns out to expose a vacancy endpoint, careers.js can read that instead without the page changing.",
+  "_comment": "Open roles shown on careers.html. Delete a role to remove it from the site; an empty list shows the 'no openings' message instead. If Breathe HR turns out to expose a vacancy endpoint, careers.js can read that instead without the page changing.",
   "updated": "2026-11-18",
   "roles": [
     {
-      "id": "warehouse-assistant",
-      "title": "Warehouse & Despatch Assistant",
+      "id": "marketing-manager",
+      "title": "Marketing Manager",
       "type": "Part-time",
       "location": "London",
-      "salary": "Competitive, based on experience",
-      "summary": "Picking, packing and despatching customer orders accurately and on time.",
+      "salary": "Based on experience",
+      "summary": "Grow trovemart.co.uk from a new storefront into a shop people come back to — and keep our eBay store busy while we do it.",
       "responsibilities": [
-        "Pick and pack orders ready for despatch",
-        "Keep stock tidy, counted and where it should be",
-        "Book parcels in with couriers and track despatches",
-        "Check returned items and log their condition"
+        "Own how TroveMart is found: SEO for the website, and titles and listings that rank on eBay",
+        "Write product descriptions that sound like a person, not a keyword list",
+        "Run our social channels and build a simple content routine we can actually keep up",
+        "Set up and test paid ads on a small budget, and stop what is not paying for itself",
+        "Watch the numbers — visitors, orders, what sells — and tell us plainly what they mean",
+        "Find ways to bring customers back, from email to repeat-buyer offers"
       ],
       "requirements": [
-        "Careful and organised — the right item, in the right box, every time",
-        "Comfortable lifting and on your feet for much of the day",
-        "Basic computer confidence (email, spreadsheets)",
+        "Hands-on e-commerce marketing experience — a marketplace background (eBay, Amazon, Etsy) is a real plus",
+        "You know your way around SEO and can show work that moved rankings or sales",
+        "Comfortable writing copy yourself, not only briefing someone else",
+        "Happy working from data, and honest when something has not worked",
+        "Self-starting — this is a small team, so you will shape the plan as well as run it",
         "Right to work in the UK"
       ],
       "closing": ""
